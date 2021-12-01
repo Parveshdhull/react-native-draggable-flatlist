@@ -231,9 +231,11 @@ function DraggableFlatListInner<T>(props: DraggableFlatListProps<T>) {
           newData.splice(from, 1);
           newData.splice(to, 0, data[from]);
         }
-        onDragEnd({ from, to, data: newData });
+        var updated = onDragEnd({ from, to, data: newData });
+	if (!updated) {
+	resetHoverState();
+	}
       }
-      resetHoverState();
     },
     [resetHoverState, propsRef]
   );
